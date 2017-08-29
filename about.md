@@ -1,18 +1,19 @@
 ---
 layout: page
-title: About
+title: 关于我
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi，All！我叫梁健。
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+#### 近况
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+- 目前工作生活在北京，从事前端开发的工作。
+- 喜欢前端，喜欢**React**。
+- 喜欢游泳，喜欢看书，喜欢听音乐。
 
+#### 联系方式
 
-[jekyll-organization]: https://github.com/jekyll
+- Gmail：[liangjian_2013@163.com](mailto:liangjian_2013@163.com)
+- 微信号：liang_jian2006 (添加时请注明“公司+真实姓名”)
+

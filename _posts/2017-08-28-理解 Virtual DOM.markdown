@@ -2,7 +2,7 @@
 layout: post
 title:  "理解 Virtual DOM"
 date:   2017-08-28 13:31:36 +0800
-categories: jekyll update
+categories: javascript
 ---
 **特别声明：**文本转载[@YangJiyuan](http://github.com/y8n)的《[理解 Virtual DOM](http://github.com/y8n/blog/issues/5)》一文，如需转载，烦请注明原文出处：[https://github.com/y8n/blog/issues/5](http://github.com/y8n/blog/issues/5)。
 
@@ -34,17 +34,17 @@ Virtual DOM的概念有很多解释，从我的理解来看，主要是三个方
 
 DOM是前端工程师最常接触的内容之一，一个DOM节点包含了很多的内容，但是一个抽象出一个DOM节点却只需要三部分：**节点类型，节点属性、子节点**。所以围绕这三个部分，我们可以使用JavaScript简单地实现一棵DOM树，然后给节点实现渲染方法，就可以实现虚拟节点到真是DOM的转化。
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-1.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-1.png)
 
 ### 对比两棵树的差异
 
 比较两棵DOM树的差异是Virtual DOM算法最核心的部分，这也是我们常说的的 Virtual DOM的`diff`算法。在比较的过程中，我们只比较同级的节点，非同级的节点不在我们的比较范围内，这样既可以满足我们的需求，又可以简化算法实现。
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-2.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-2.png)
 
 比较“树”的差异，首先是要对树进行遍历，常用的有两种遍历算法，分别是深度优先遍历和广度优先遍历，一般的`diff`算法中都采用的是深度优先遍历。对新旧两棵树进行一次深度优先的遍历，这样每个节点都会有一个唯一的标记。在遍历的时候，每遍历到一个节点就把该节点和新的树的同一个位置的节点进行对比，如果有差异的话就记录到一个对象里面。
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-3.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-3.png)
 
 例如，上面的`div`和新的`div`有差异，当前的标记是`0`，那么：`patches[0] = [{difference}, {difference}, ...]`。同理`p`是`patches[1]`，`ul`是`patches[3]`，以此类推。这样当遍历完整棵树的时候，就可以获得一个完整的差异对象。
 
@@ -66,7 +66,7 @@ DOM是前端工程师最常接触的内容之一，一个DOM节点包含了很�
 - `setAttribute()/removeAttribute()`
 - `textContent`
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-4.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-4.png)
 
 ## 动手实现Virtual DOM
 
@@ -80,11 +80,11 @@ Virtual DOM的原理和实现的说明已经结束了，但是对于Virtual DOM�
 
 首先，先来看一下性能，在诸多的Virtual DOM实现中，都会强调算法的高效，那么在实际的使用中，Virtual DOM的性能到底如何呢？
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-5.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-5.png)
 
 上图是对一个简单的DOM树进行不同方式的操作，由左边的结构更新为右边的结构，通过原生操作、jQuery、Virtual DOM和React四种方式，在Chrome的timeline中得到的性能对比，在这个图中，我们并没有看出Virtual DOM或者React的优势，通过对比我们发现，原生的操作要比其他三种方式快，而其他三种方式就相差无几了。当然，这样一个简单测试并没有说明什么，测试的DOM结构简单，和我们平时面对的业务场景不是一个量级，代表不了什么，但是起码我们可以看到，这种情况下好像Virtual DOM并没有我们想象的性能优势。
 
-![Virtual DOM](http://www.w3cplus.com/sites/default/files/blogs/2017/1708/VirtualDOM-6.png)
+![Virtual DOM](/assets/update/2017/08/28/VirtualDOM-6.png)
 
 在接下来的测试中我们增加测试量。上图分别是使用原生操作、Virtual DOM和React三种方式进行两类测试：插入`10000`个节点`100`次和修改`3000`个节点的属性`100`次。分别取这`100`次的耗时最大值、最小值和平均值。从图中我们可以看到明显的差异，Virtual DOM和React的差异可以理解，毕竟我们自己实现的Virtual DOM没有那么庞大，只是针对虚拟DOM而实现的，比React快一点可以理解，但是原生的操作比Virtual DOM和React都要快得多，这又是怎么一回事，好像和我们预想的不一样，回到最初，我们提到，Virtual DOM的产生前提之一就是直接操作DOM很慢，现在看来直接操作不但不慢，反而快了很多，这不得不让我产生了怀疑，是我对Virtual DOM的理解有误还是对DOM的理解有误呢？
 
