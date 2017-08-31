@@ -821,7 +821,7 @@ const map = (f) => (list) => list.map(f)
 
 由其他类型组合在一起的复合类型。两种常见的代数类型是 [sum](#sum-type) 和 [product](#product-type) 。
 
-<div id="sum" tabindex="-1"></div>
+<div id="sum-type" tabindex="-1"></div>
 
 ### Sum 类型
 
