@@ -3,3 +3,42 @@
 ---
 
 @import "minima";
+
+
+h4, h5, h6{
+	font-size: 1em;
+}
+
+.post-content table {
+    width: 100%;
+    border: 1px solid #dedede;
+    margin: 15px 0;
+    border-collapse: collapse
+}
+
+.post-content table td,.post-content table tr {
+    height: 35px
+}
+
+.post-content table thead tr {
+    background: #f8f8f8
+}
+
+.post-content table tbody tr:hover {
+    background: #efefef
+}
+
+.post-content table td,.post-content table th {
+    border: 1px solid #dedede;
+    padding: 0 10px
+}
+
+.post-content figure table {
+    border: none;
+    width: auto;
+    margin: 0
+}
+
+.post-content figure table tbody tr:hover {
+    background: 0 0
+}
